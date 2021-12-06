@@ -10,7 +10,7 @@ const ProfilePage = (props) => {
                     <Table>
                         <tbody>
                             <tr>
-                                <td>First Name: {props.user.firstname}</td>
+                                <td>First Name: {props.user.first_name}</td>
                                 <td>Last Name: {props.user.lastname}</td>
                                 <td>Middle Name: {props.user.middlename}</td>
                                 <td>Username: {props.user.username}</td>

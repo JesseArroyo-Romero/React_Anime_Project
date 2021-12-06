@@ -5,15 +5,24 @@ import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import ProfilePage from './ProfilePage/ProfilePage';
 import LoginScreen from './LoginScreen/LoginScreen';
 import HomePage from './HomePage/HomePage';
+import AccountRegistration from './AccountRegistration/AccountRegistration';
+import HeaderAndNav from './HeaderAndNav/HeaderAndNav';
 
 
 function App() {
 
+    const [loadData, setLoadData] = useState(false)
     const [user, setUser] = useState({})
+    const [topAnime, setTopAnime] = useState({})
+    const [currentAnime, setCurrentAnime] = useState('')
+
+    useEffect(() => {
+        getTopAnime()
+    })
 
     const loginUser = async (loginUser) => {
         let response = await axios.post('http://127.0.0.1:8000/api/auth/login/', loginUser)
-        localStorage.setItem('token', response.data.token)
+        localStorage.setItem('token', response.data.access)
         getUserJWT();
     }
 
@@ -22,6 +31,7 @@ function App() {
         try {
             const user = jwtDecode(jwt)
             setUser(user)
+            console.log("get user jwt call", user)
             console.log(jwt)
         } catch (error) {
             console.log("Error in decoding JWT token: ", error)
@@ -47,13 +57,25 @@ function App() {
         await axios.post('http://127.0.0.1:8000/api/auth/register/', newUser)
     }
 
+    const getTopAnime = async () => {
+        let response = await axios.get('https://api.jikan.moe/v3/top/anime/1/upcoming')
+        setTopAnime(response.data.top)
+        console.log(response.data.top)
+    }
+
+    // const getCurrentAnime = async (anime) => {
+    //     setCurrentAnime(anime)
+    // }
+
     return (
         <div>
             <Router>
+                <HeaderAndNav logOut={logOut}/>
                 <Routes>
                     <Route path="/Profile" element={<ProfilePage user={user} />} />
                     <Route path="/login" element={<LoginScreen loginUserCall={loginUser} />} />
-                    <Route path="/" element={<HomePage />} />
+                    <Route path="/" element={<HomePage topAnime={topAnime} />} />
+                    <Route path="/AccountRegistration" element={<AccountRegistration accountCreation={registerUser} />} />
                 </Routes>
             </Router>
         </div>

@@ -1,0 +1,5 @@
+.sideScrollOne {
+    background-color: blue;
+    overflow: auto;
+    white-space: nowrap;
+}
