@@ -7,18 +7,22 @@ import LoginScreen from './LoginScreen/LoginScreen';
 import HomePage from './HomePage/HomePage';
 import AccountRegistration from './AccountRegistration/AccountRegistration';
 import HeaderAndNav from './HeaderAndNav/HeaderAndNav';
+import AnimeDetails from './AnimeDetails/AnimeDetails';
 
 
 function App() {
 
     const [loadData, setLoadData] = useState(false)
     const [user, setUser] = useState({})
-    const [topAnime, setTopAnime] = useState({})
+    const [topAnime, setTopAnime] = useState([])
+    const [topAnimeMovie, setTopAnimeMovie] = useState([])
+    const [animeDetails, setAnimeDetails] = useState({})
     const [currentAnime, setCurrentAnime] = useState('')
 
     useEffect(() => {
         getTopAnime()
-    })
+        getTopAnimeMovie()
+    }, [])
 
     const loginUser = async (loginUser) => {
         let response = await axios.post('http://127.0.0.1:8000/api/auth/login/', loginUser)
@@ -63,6 +67,17 @@ function App() {
         console.log(response.data.top)
     }
 
+    const getTopAnimeMovie = async () => {
+        let response = await axios.get('https://api.jikan.moe/v3/top/anime/1/movie')
+        setTopAnimeMovie(response.data.top)
+    }
+
+    const seeAnimeDetails = (anime) => {
+        let details = topAnime.filter((detailsOfAnime) => detailsOfAnime.mal_id === anime)
+        setAnimeDetails(details[0])
+        console.log(details)
+    }
+
     // const getCurrentAnime = async (anime) => {
     //     setCurrentAnime(anime)
     // }
@@ -74,8 +89,9 @@ function App() {
                 <Routes>
                     <Route path="/Profile" element={<ProfilePage user={user} />} />
                     <Route path="/login" element={<LoginScreen loginUserCall={loginUser} />} />
-                    <Route path="/" element={<HomePage topAnime={topAnime} />} />
+                    <Route path="/" element={<HomePage topAnime={topAnime} topAnimeMovie={topAnimeMovie} view={seeAnimeDetails}/>} />
                     <Route path="/AccountRegistration" element={<AccountRegistration accountCreation={registerUser} />} />
+                    <Route path="/AnimeDetails" element={<AnimeDetails details={animeDetails}/>} />
                 </Routes>
             </Router>
         </div>

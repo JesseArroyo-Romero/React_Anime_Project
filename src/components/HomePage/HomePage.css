@@ -1,5 +1,10 @@
 .sideScrollOne {
-    background-color: blue;
-    overflow: auto;
-    white-space: nowrap;
+    background-color: lightblue;
+    border: 1px solid black;
+    height: 400px;
+    width: 500px;
+    overflow-x: scroll;
 }
+/* img {
+    float: left;
+} */
