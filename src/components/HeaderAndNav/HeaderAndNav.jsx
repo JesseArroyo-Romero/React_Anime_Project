@@ -7,15 +7,15 @@ import useForm from '../LoginScreen/useForm'
 import './HeaderAndNav.css'
 
 const HeaderAndNav = (props) => {
-    const {formValues, handleChange, handleSubmit} = useForm()//searchForAnime)
+    const {formValues, handleChange, handleSubmit} = useForm(searchForAnime)//searchForAnime)
 
     let navigate = useNavigate()
 
-    // async function searchForAnime() {
-    //     console.log(formValues)
-        // props.SOMETHING.(formValues.searchTerm)
-        // navigate("../anime")
-    //}
+    async function searchForAnime() {
+        console.log(formValues)
+        props.searchAnimeV4(formValues.searchTerm)
+        navigate("../SearchResult")
+    }
     
     return (
         <div>

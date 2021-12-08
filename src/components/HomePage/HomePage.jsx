@@ -18,32 +18,132 @@ const HomePage = (props) =>{
                 </Row>
             </Container>
             <div>
-            <h3>Top Upcoming Anime: </h3>
-                {props.topAnime.map((anime) => {
-                    return(
-                        <div className="sideScrollOne">
-                                <h6>Rank: {anime.rank}</h6>
-                                {anime.title}
-                                {anime.type}
-                                {anime.episodes}
-                                <img src={anime.image_url}></img>
-                                <Link to="/AnimeDetails" onClick={() => props.view(anime.mal_id)}>Details</Link>
-                        </div>
-                    )
-                })}
+            {/* THIS USES V4 API */}
+            <h3>Top Anime: </h3>
+                <Table>
+                    <thead>
+                        <tr>
+                            <td>Title</td>
+                            <td>Rank</td>
+                            <td>Type</td>
+                            <td>Episodes</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {props.topAnime.map((anime) => {
+                            return(
+                                
+                                    <tr key={anime.mal_id}>
+                                        <td>{anime.title}</td>
+                                        <td>{anime.rank}</td>
+                                        <td>{anime.type}</td>
+                                        <td>{anime.episodes}</td>
+                                        <td><img src={anime.images.jpg.image_url}></img></td>
+                                        <td><Link to="/AnimeDetailsV4" onClick={() => props.view(anime.mal_id)}>Details</Link></td>
+                                    </tr>
+                                
+                            )
+                        })}
+                    </tbody>
+                </Table>
             </div>
             <div>
-                <h3>Top Anime Movies: </h3>
-                {props.topAnimeMovie.map((movie) => {
-                    return (
-                        <div>
-                            <h6>Rank: {movie.rank}</h6>
-                            {movie.title}
-                            {movie.type}
-                            <img src={movie.image_url}></img>
-                        </div>
-                    )
-                })}
+                {/* USING V3********* */}
+                <h3>Top Action Anime: </h3>
+                <Table>
+                    <thead>
+                        <tr>
+                            <td>Title</td>
+                            <td>Rating</td>
+                            <td>Score</td>
+                            <td>Type</td>
+                            <td>Episodes</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {props.actionAnime.map((anime) => {
+                            return(
+                                
+                                    <tr key={anime.mal_id}>
+                                        <td>{anime.title}</td>
+                                        <td>{anime.rated}</td>
+                                        <td>{anime.score}</td>
+                                        <td>{anime.type}</td>
+                                        <td>{anime.episodes}</td>
+                                        <td><img src={anime.image_url}></img></td>
+                                        <td><Link to="/AnimeDetails" onClick={() => props.viewV3(anime.mal_id)}>Details</Link></td>
+                                    </tr>
+                                
+                            )
+                        })}
+                    </tbody>
+                </Table>
+            </div>
+
+            {/* BREAK */}
+
+            <div>
+                {/* USING V3********* */}
+                <h3>Top Shounen Anime: </h3>
+                <Table>
+                    <thead>
+                        <tr>
+                            <td>Title</td>
+                            <td>Rating</td>
+                            <td>Score</td>
+                            <td>Type</td>
+                            <td>Episodes</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {props.shounenAnime.map((anime) => {
+                            return(
+                                    <tr key={anime.mal_id}>
+                                        <td>{anime.title}</td>
+                                        <td>{anime.rated}</td>
+                                        <td>{anime.score}</td>
+                                        <td>{anime.type}</td>
+                                        <td>{anime.episodes}</td>
+                                        <td><img src={anime.image_url}></img></td>
+                                        <td><Link to="/AnimeDetails" onClick={() => props.viewV3(anime.mal_id)}>Details</Link></td>
+                                    </tr>
+                            )
+                        })}
+                    </tbody>
+                </Table>
+            </div>
+            
+            {/* BREAK */}
+
+            <div>
+                {/* USING V3********* */}
+                <h3>Top Fantasy Anime: </h3>
+                <Table>
+                    <thead>
+                        <tr>
+                            <td>Title</td>
+                            <td>Rating</td>
+                            <td>Score</td>
+                            <td>Type</td>
+                            <td>Episodes</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {props.fantasyAnime.map((anime) => {
+                            return(
+                                    <tr key={anime.mal_id}>
+                                        <td>{anime.title}</td>
+                                        <td>{anime.rated}</td>
+                                        <td>{anime.score}</td>
+                                        <td>{anime.type}</td>
+                                        <td>{anime.episodes}</td>
+                                        <td><img src={anime.image_url}></img></td>
+                                        <td><Link to="/AnimeDetails" onClick={() => props.viewV3(anime.mal_id)}>Details</Link></td>
+                                    </tr>
+                            )
+                        })}
+                    </tbody>
+                </Table>
             </div>
         </div>
     )
