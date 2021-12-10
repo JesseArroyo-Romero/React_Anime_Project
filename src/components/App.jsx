@@ -23,6 +23,8 @@ function App() {
     const [animeDetails, setAnimeDetails] = useState([])
     const [animeDetailsV3, setAnimeDetailsV3] = useState([])
     const [searchResult, setSearchResult] = useState([])
+    const [comments, setComments] = useState([])
+    const [replies, setReplies] = useState([])
 
     let combinedList = [...actionAnime, ...shounenAnime, ...fantasyAnime]
 
@@ -42,14 +44,22 @@ function App() {
     const getUserJWT = () => {
         const jwt = localStorage.getItem('token')
         try {
-            const user = jwtDecode(jwt)
+            const user = jwtDecode(jwt) 
             setUser(user)
+            getUserInfo(user.user_id)
             console.log("get user jwt call", user)
             console.log(jwt)
         } catch (error) {
             console.log("Error in decoding JWT token: ", error)
             setUser({})
         }
+    }
+
+    const getUserInfo = async (user) => {
+        const jwt = localStorage.getItem('token')
+        let logged = await axios.get(`http://127.0.0.1:8000/api/auth/user/${user}`, {headers:{Authorization:'Bearer ' + jwt}})
+        setUser(logged.data)
+        console.log('user info', logged.data)
     }
 
     const logOut = () => {
@@ -105,15 +115,49 @@ function App() {
     }
     
     const seeAnimeDetailsV3 = (anime) => {
-        console.log("Combined List", combinedList)
         let details = combinedList.filter((detailsOfAnime) => detailsOfAnime.mal_id === anime)
         setAnimeDetailsV3(details[0])
     }
 
     const searchAnimeV4 = async (searchTerm) => {
-        debugger;
         let response = await axios.get(`https://api.jikan.moe/v4/anime?q=${searchTerm}&genre_exclude=12`)
         setSearchResult(response.data.data)
+    }
+
+    const postComments = async (comment) => {
+        const jwt = localStorage.getItem('token')
+        console.log(comment)
+        let response = await axios.post('http://127.0.0.1:8000/comments/', comment, {headers:{Authorization:'Bearer ' + jwt}})
+        console.log(response.data)
+    }
+
+    const getComments = async (id) => {
+        console.log(id)
+        try{
+            let response = await axios.get(`http://127.0.0.1:8000/comments/anime/${id}/`)
+            console.log(response.data)
+            setComments(response.data)
+        } catch (error) {
+            console.log("retrieving comments", error)
+        }
+    }
+
+    const postReply = async (reply) => {
+        const jwt = localStorage.getItem('token')
+        console.log(reply)
+        let response = await axios.post('http://127.0.0.1:8000/replies/', reply, {headers:{Authorization:'Bearer ' + jwt}})
+        console.log(response.data)
+    }
+
+    const getReplies = async (id) => {
+        console.log(id)
+        try {
+            let response = await axios.get(`http://127.0.0.1:8000/replies/${id}/`)
+            console.log(response.data)
+            setReplies(response.data)
+        } catch (error) {
+            console.log("retrieving replies", error)
+        }
     }
 
     return (
@@ -124,17 +168,34 @@ function App() {
                     <Route path="/Profile" element={<ProfilePage user={user} />} />
                     <Route path="/login" element={<LoginScreen loginUserCall={loginUser} />} />
                     <Route path="/" element={<HomePage 
-                                                topAnime={topAnime} 
-                                                actionAnime={actionAnime} 
-                                                shounenAnime={shounenAnime}
-                                                fantasyAnime={fantasyAnime} 
-                                                view={seeAnimeDetailsV4}
-                                                viewV3={seeAnimeDetailsV3}
-                                            />} 
-                    />
+                                                            topAnime={topAnime} 
+                                                            actionAnime={actionAnime} 
+                                                            shounenAnime={shounenAnime}
+                                                            fantasyAnime={fantasyAnime} 
+                                                            view={seeAnimeDetailsV4}
+                                                            viewV3={seeAnimeDetailsV3}
+                                                            />} 
+                                                            />
                     <Route path="/AccountRegistration" element={<AccountRegistration accountCreation={registerUser} />} />
-                    <Route path="/AnimeDetailsV4" element={<AnimeDetailsV4 details={animeDetails}/>} />
-                    <Route path="/AnimeDetails" element={<AnimeDetails detailsV3={animeDetailsV3}/>} />
+                    <Route path="/AnimeDetailsV4" element={<AnimeDetailsV4 
+                                                            details={animeDetails} 
+                                                            postCommentsV4={postComments}
+                                                            getCommentsV4={getComments}
+                                                            commentsV4={comments}
+                                                            userV4={user}
+                                                            />} 
+                                                            />
+                    <Route path="/AnimeDetails" element={<AnimeDetails
+                                                            detailsV3={animeDetailsV3} 
+                                                            postComments={postComments} 
+                                                            user={user} 
+                                                            getComments={getComments} 
+                                                            comments={comments}
+                                                            replies={replies}
+                                                            getReplies={getReplies}
+                                                            postReply={postReply}
+                                                            />} 
+                                                            />
                     <Route path="/SearchResult" element={<SearchResult searchResult={searchResult} />} />
                 </Routes>
             </Router>
