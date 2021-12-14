@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import './HomePage.css'
 
 // import './HomePage.css'
 
@@ -12,12 +13,12 @@ const HomePage = (props) =>{
         <div>
             <Container>
                 <Row>
-                    <Col>
+                    <Col className='text'>
                         <h1>Welcome to Anime Planet</h1>
                     </Col>
                 </Row>
             </Container>
-            <div>
+            <div className='scroll'>
             {/* THIS USES V4 API */}
             <h3>Top Anime: </h3>
                 <Table>
@@ -32,7 +33,7 @@ const HomePage = (props) =>{
                     <tbody>
                         {props.topAnime.map((anime) => {
                             return(
-                                
+                                    
                                     <tr key={anime.mal_id}>
                                         <td>{anime.title}</td>
                                         <td>{anime.rank}</td>
@@ -41,13 +42,13 @@ const HomePage = (props) =>{
                                         <td><img src={anime.images.jpg.image_url}></img></td>
                                         <td><Link to="/AnimeDetailsV4" onClick={() => props.view(anime.mal_id)}>Details</Link></td>
                                     </tr>
-                                
+                                    
                             )
                         })}
                     </tbody>
                 </Table>
             </div>
-            <div>
+            <div className='scroll'>
                 {/* USING V3********* */}
                 <h3>Top Action Anime: </h3>
                 <Table>
@@ -82,7 +83,7 @@ const HomePage = (props) =>{
 
             {/* BREAK */}
 
-            <div>
+            <div className='scroll'>
                 {/* USING V3********* */}
                 <h3>Top Shounen Anime: </h3>
                 <Table>
@@ -115,7 +116,7 @@ const HomePage = (props) =>{
             
             {/* BREAK */}
 
-            <div>
+            <div className='scroll'>
                 {/* USING V3********* */}
                 <h3>Top Fantasy Anime: </h3>
                 <Table>

@@ -10,10 +10,10 @@ import HeaderAndNav from './HeaderAndNav/HeaderAndNav';
 import AnimeDetails from './AnimeDetails/AnimeDetails';
 import AnimeDetailsV4 from './AnimeDetailsV4/AnimeDetailsV4';
 import SearchResult from './SearchResult/SearchResult';
+import EditProfile from './EditProfile/EditProfile';
 
 
 function App() {
-
     const [loadData, setLoadData] = useState(false)
     const [user, setUser] = useState({})
     const [topAnime, setTopAnime] = useState([])
@@ -24,7 +24,6 @@ function App() {
     const [animeDetailsV3, setAnimeDetailsV3] = useState([])
     const [searchResult, setSearchResult] = useState([])
     const [comments, setComments] = useState([])
-    const [replies, setReplies] = useState([])
 
     let combinedList = [...actionAnime, ...shounenAnime, ...fantasyAnime]
 
@@ -69,15 +68,27 @@ function App() {
     }
 
     const registerUser = async (objectBeingPassedIn) => {
+        console.log(objectBeingPassedIn)
         let newUser = {
-            firstName: objectBeingPassedIn.first_name,
-            lastName: objectBeingPassedIn.last_name,
-            middleName: objectBeingPassedIn.middle_name,
-            username: objectBeingPassedIn.username,
-            password: objectBeingPassedIn.password,
-            email: objectBeingPassedIn.email
+            username:objectBeingPassedIn.username,
+            password:objectBeingPassedIn.password,
+            email:objectBeingPassedIn.email,
+            first_name:objectBeingPassedIn.firstName,
+            last_name:objectBeingPassedIn.lastName,
+            middle_name:objectBeingPassedIn.middleName,
         }
-        await axios.post('http://127.0.0.1:8000/api/auth/register/', newUser)
+        try {
+          let response = await axios.post('http://127.0.0.1:8000/api/auth/register/', JSON.stringify(newUser), {
+              headers:{
+                  'content-type': 'application/json'
+              }
+          })
+          console.log(response.data)
+            
+        } catch (error) {
+            console.log(error.message)
+            
+        }
     }
 
     const getTopAnime = async () => {
@@ -149,15 +160,12 @@ function App() {
         console.log(response.data)
     }
 
-    const getReplies = async (id) => {
+    const editProfile = async (userObject) => {
+        const jwt = localStorage.getItem('token')
+        let id = user.id
         console.log(id)
-        try {
-            let response = await axios.get(`http://127.0.0.1:8000/replies/${id}/`)
-            console.log(response.data)
-            setReplies(response.data)
-        } catch (error) {
-            console.log("retrieving replies", error)
-        }
+        let response = await axios.put(`http://127.0.0.1:8000/api/auth/edit/${id}`, userObject, {headers:{Authorization:'Bearer ' + jwt}})
+        setUser(response.data)
     }
 
     return (
@@ -165,7 +173,7 @@ function App() {
             <Router>
                 <HeaderAndNav logOut={logOut} searchAnimeV4={searchAnimeV4}/>
                 <Routes>
-                    <Route path="/Profile" element={<ProfilePage user={user} />} />
+                    <Route path="/Profile" element={<ProfilePage user={user} deets={user}/>} />
                     <Route path="/login" element={<LoginScreen loginUserCall={loginUser} />} />
                     <Route path="/" element={<HomePage 
                                                             topAnime={topAnime} 
@@ -191,12 +199,14 @@ function App() {
                                                             user={user} 
                                                             getComments={getComments} 
                                                             comments={comments}
-                                                            replies={replies}
-                                                            getReplies={getReplies}
                                                             postReply={postReply}
                                                             />} 
                                                             />
-                    <Route path="/SearchResult" element={<SearchResult searchResult={searchResult} />} />
+                    <Route path="/SearchResult" element={<SearchResult 
+                                                            searchResult={searchResult} 
+                                                            />} 
+                                                            />
+                    <Route path="/EditProfile" element={<EditProfile edit={user} editCall={editProfile}/>} />
                 </Routes>
             </Router>
         </div>

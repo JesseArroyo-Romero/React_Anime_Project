@@ -1,10 +1,14 @@
 import React, { useState, useEffect} from "react";
 import Table from "react-bootstrap/Table";
 import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import Replies from "../Replies/Replies";
+
 const AnimeDetailsV4 = (props) => {
 
     const [comment, setComment] = useState([' '])
     const [anime, setAnime] = useState()
+    const [reply, setReply] = useState([' '])
   
     useEffect(() => {
         setAnime(props.details.mal_id)
@@ -19,6 +23,16 @@ const AnimeDetailsV4 = (props) => {
         let newComment = {user:props.userV4.id, comments:comment, anime_id:anime}
         event.preventDefault()
         props.postCommentsV4(newComment)
+    }
+
+    const handleSubmitReplies = (event, id) => {
+        event.preventDefault()
+        let newReply = {comments: id, text: reply}
+        props.postReply(newReply)
+    }
+
+    const handleChangeReplies = (event) => {
+        setReply(event.target.value)
     }
 
     return(
@@ -57,9 +71,18 @@ const AnimeDetailsV4 = (props) => {
                 <tbody>
                     {props.commentsV4.map((element) => {
                     return(
-                        <tr>
-                        <td>{element.comments}</td>
-                        </tr>
+                        <div>
+                            <tr>
+                                <td>{element.comments}</td>
+                            </tr>
+                            <div className="">
+                            <Form className="reply" type="submit" onSubmit={event => handleSubmitReplies(event, element.id)} return false>
+                                <input className="Reply" name="reply" onChange={handleChangeReplies} placeholder="Reply" type="text" />
+                                <Button type="submit">Reply</Button>
+                            </Form>
+                            <Replies id={element.id}/>
+                            </div>
+                        </div>
                     )
                     })}
                 </tbody>

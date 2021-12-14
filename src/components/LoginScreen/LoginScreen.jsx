@@ -19,7 +19,7 @@ const LoginScreen = (props) => {
         <div>
             <Form onSubmit={handleSubmit}>
                 <Form.Group>
-                    <Form.Label>User Name</Form.Label>
+                    <Form.Label>Username</Form.Label>
                     <Form.Control type="username" name="username" placeholder="Enter UserName" onChange={handleChange} required={true} />
                 </Form.Group>
 

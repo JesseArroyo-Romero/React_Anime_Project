@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from "react-bootstrap/Button"
 import Table from "react-bootstrap/Table"
+import { Link } from 'react-router-dom';
 
 const ProfilePage = (props) => {
     return (
@@ -16,6 +17,7 @@ const ProfilePage = (props) => {
                                 <td>Username: {props.user.username}</td>
                                 <td>Email: {props.user.email}</td>
                             </tr>
+                            <Link to="/EditProfile">Edit Profile</Link>
                         </tbody>
                     </Table>
                 </form>

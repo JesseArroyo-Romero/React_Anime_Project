@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Replies from '../Replies/Replies'
 import axios from "axios";
 
 const AnimeDetails = (props) => {
@@ -13,8 +14,7 @@ const AnimeDetails = (props) => {
   useEffect(() => {
       setAnime(props.detailsV3.mal_id)
       props.getComments(props.detailsV3.mal_id)
-      props.getReplies(props.comments.id)
-  }, [props.detailsV3])
+  }, [])
 
   const handleChange = (event) => {
       setComment(event.target.value)
@@ -88,13 +88,7 @@ const AnimeDetails = (props) => {
                     <input className="Reply" name="reply" onChange={handleChangeReplies} placeholder="Reply" type="text" />
                     <Button type="submit">Reply</Button>
                   </Form>
-                {props.replies.map((element) => {
-                  return(
-                    <tr>
-                      <td>{element.replies}</td>
-                    </tr>
-                  )
-                })}
+                  <Replies id={element.id}/>
                 </div>
               )
             })}
