@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col'
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './HomePage.css'
+import Rows from '../Row/Row';
 
 // import './HomePage.css'
 
@@ -18,10 +19,83 @@ const HomePage = (props) =>{
                     </Col>
                 </Row>
             </Container>
-            <div className='scroll'>
+            {/* <Rows title='Top Anime'/> */}
+            <div className='row'>
+                <h2>Top Anime</h2>
+                <div className='row_posters'>
+                    {props.topAnime.map((anime) => {
+                        return(
+                            
+                                <img 
+                                key={anime.mal_id} 
+                                className='row_poster' 
+                                src={anime.images.jpg.image_url} 
+                                alt={anime.title} 
+                                title={anime.synopsis}>
+                                {/* onClick={<Link to="/AnimeDetailsV4" onClick={() => props.view(anime.mal_id)}/>}> */}
+                                </img>
+                            )
+                    })}
+            </div>
+
+
+            <div className='row'>
+                <h2>Top Action Anime</h2>
+                <div className='row_posters'>
+                    {props.actionAnime.map((anime) =>{
+                        return(
+                                <img 
+                                key={anime.mal_id} 
+                                className='row_poster' 
+                                src={anime.image_url} 
+                                alt={anime.title} 
+                                title={anime.synopsis}>
+                                </img>
+                        )
+                    })}
+                </div>
+            </div>
+
+
+            <div className='row'>
+                <h2>Top Shounen Anime</h2>
+                <div className='row_posters'>
+                    {props.shounenAnime.map((anime) =>{
+                        return(
+                            <img 
+                            key={anime.mal_id} 
+                            className='row_poster' 
+                            src={anime.image_url} 
+                            alt={anime.title} 
+                            title={anime.synopsis}>
+                            </img>
+                        )
+                    })}
+                </div>
+            </div>
+
+
+            <div className='row'>
+                <h2>Top Fantasy Anime</h2>
+                <div className='row_posters'>
+                    {props.fantasyAnime.map((anime) =>{
+                        return(
+                            <img 
+                            key={anime.mal_id} 
+                            className='row_poster' 
+                            src={anime.image_url} 
+                            alt={anime.title} 
+                            title={anime.synopsis}>
+                            </img>
+                        )
+                    })}
+                </div>
+            </div>
+            </div>
+            {/* <div className='background'> */}
             {/* THIS USES V4 API */}
-            <h3>Top Anime: </h3>
-                <Table>
+            {/* <h3>Top Anime: </h3>
+                <Table className='scroll'>
                     <thead>
                         <tr>
                             <td>Title</td>
@@ -33,7 +107,7 @@ const HomePage = (props) =>{
                     <tbody>
                         {props.topAnime.map((anime) => {
                             return(
-                                    
+                                    // <div className='horizontal'>
                                     <tr key={anime.mal_id}>
                                         <td>{anime.title}</td>
                                         <td>{anime.rank}</td>
@@ -42,15 +116,15 @@ const HomePage = (props) =>{
                                         <td><img src={anime.images.jpg.image_url}></img></td>
                                         <td><Link to="/AnimeDetailsV4" onClick={() => props.view(anime.mal_id)}>Details</Link></td>
                                     </tr>
-                                    
+                                    // </div>
                             )
                         })}
                     </tbody>
                 </Table>
-            </div>
-            <div className='scroll'>
+            </div> */}
+            {/* <div className='scroll'> */}
                 {/* USING V3********* */}
-                <h3>Top Action Anime: </h3>
+                {/* <h3>Top Action Anime: </h3>
                 <Table>
                     <thead>
                         <tr>
@@ -79,13 +153,13 @@ const HomePage = (props) =>{
                         })}
                     </tbody>
                 </Table>
-            </div>
+            </div> */}
 
-            {/* BREAK */}
+            
 
-            <div className='scroll'>
+            {/* <div className='scroll'> */}
                 {/* USING V3********* */}
-                <h3>Top Shounen Anime: </h3>
+                {/* <h3>Top Shounen Anime: </h3>
                 <Table>
                     <thead>
                         <tr>
@@ -112,13 +186,12 @@ const HomePage = (props) =>{
                         })}
                     </tbody>
                 </Table>
-            </div>
+            </div> */}
             
-            {/* BREAK */}
 
-            <div className='scroll'>
+            {/* <div className='scroll'> */}
                 {/* USING V3********* */}
-                <h3>Top Fantasy Anime: </h3>
+                {/* <h3>Top Fantasy Anime: </h3>
                 <Table>
                     <thead>
                         <tr>
@@ -145,7 +218,7 @@ const HomePage = (props) =>{
                         })}
                     </tbody>
                 </Table>
-            </div>
+            </div> */}
         </div>
     )
 }

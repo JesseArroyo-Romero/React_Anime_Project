@@ -1,7 +1,31 @@
-div.scroll {
-    background-color: lightblue;
-  }
+.row_posters {
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  padding: 20px;
+}
+
+.row_posters::-webkit-scrollbar {
+  display: none;
+}
+
+.row_poster {
+  object-fit: contain;
+  width: 90%;
+  max-height: 300px;
+  margin-right: 10px;
+  transition: transform 450ms;
+}
+
+.row_poster:hover {
+  transform: scale(1.08);
+}
 
 .text {
   text-align: center;
 }
+
+/* div > row > row_posters > row_poster > title {
+  font-size: xx-small;
+  text-align: center;
+} */

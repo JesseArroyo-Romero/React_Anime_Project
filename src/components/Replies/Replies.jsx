@@ -9,7 +9,7 @@ const Replies = (props) => {
     
     useEffect(() => {
         getReplies(props.id)
-    }, [])
+    }, [replies])
 
     const getReplies = async (id) => {
         console.log(id)

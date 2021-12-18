@@ -11,6 +11,7 @@ import AnimeDetails from './AnimeDetails/AnimeDetails';
 import AnimeDetailsV4 from './AnimeDetailsV4/AnimeDetailsV4';
 import SearchResult from './SearchResult/SearchResult';
 import EditProfile from './EditProfile/EditProfile';
+import './App.css'
 
 
 function App() {
