@@ -20,7 +20,7 @@ const HomePage = (props) =>{
                 </Row>
             </Container>
             {/* <Rows title='Top Anime'/> */}
-            <div className='row'>
+            {/* <div className='row'>
                 <h2>Top Anime</h2>
                 <div className='row_posters'>
                     {props.topAnime.map((anime) => {
@@ -32,14 +32,13 @@ const HomePage = (props) =>{
                                 src={anime.images.jpg.image_url} 
                                 alt={anime.title} 
                                 title={anime.synopsis}>
-                                {/* onClick={<Link to="/AnimeDetailsV4" onClick={() => props.view(anime.mal_id)}/>}> */}
                                 </img>
                             )
                     })}
-            </div>
+            </div> */}
 
 
-            <div className='row'>
+            {/* <div className='row'>
                 <h2>Top Action Anime</h2>
                 <div className='row_posters'>
                     {props.actionAnime.map((anime) =>{
@@ -54,10 +53,10 @@ const HomePage = (props) =>{
                         )
                     })}
                 </div>
-            </div>
+            </div> */}
 
 
-            <div className='row'>
+            {/* <div className='row'>
                 <h2>Top Shounen Anime</h2>
                 <div className='row_posters'>
                     {props.shounenAnime.map((anime) =>{
@@ -72,10 +71,10 @@ const HomePage = (props) =>{
                         )
                     })}
                 </div>
-            </div>
+            </div> */}
 
 
-            <div className='row'>
+            {/* <div className='row'>
                 <h2>Top Fantasy Anime</h2>
                 <div className='row_posters'>
                     {props.fantasyAnime.map((anime) =>{
@@ -91,10 +90,12 @@ const HomePage = (props) =>{
                     })}
                 </div>
             </div>
-            </div>
-            {/* <div className='background'> */}
+            </div> */}
+
+
+            <div className='background'> 
             {/* THIS USES V4 API */}
-            {/* <h3>Top Anime: </h3>
+            <h3>Top Anime: </h3>
                 <Table className='scroll'>
                     <thead>
                         <tr>
@@ -121,10 +122,10 @@ const HomePage = (props) =>{
                         })}
                     </tbody>
                 </Table>
-            </div> */}
-            {/* <div className='scroll'> */}
+            </div>
+            <div className='scroll'> 
                 {/* USING V3********* */}
-                {/* <h3>Top Action Anime: </h3>
+                <h3>Top Action Anime: </h3>
                 <Table>
                     <thead>
                         <tr>
@@ -153,13 +154,13 @@ const HomePage = (props) =>{
                         })}
                     </tbody>
                 </Table>
-            </div> */}
+            </div>
 
             
 
-            {/* <div className='scroll'> */}
+            <div className='scroll'>
                 {/* USING V3********* */}
-                {/* <h3>Top Shounen Anime: </h3>
+                <h3>Top Shounen Anime: </h3>
                 <Table>
                     <thead>
                         <tr>
@@ -186,12 +187,12 @@ const HomePage = (props) =>{
                         })}
                     </tbody>
                 </Table>
-            </div> */}
+            </div>
             
 
-            {/* <div className='scroll'> */}
+            <div className='scroll'>
                 {/* USING V3********* */}
-                {/* <h3>Top Fantasy Anime: </h3>
+                <h3>Top Fantasy Anime: </h3>
                 <Table>
                     <thead>
                         <tr>
@@ -218,7 +219,7 @@ const HomePage = (props) =>{
                         })}
                     </tbody>
                 </Table>
-            </div> */}
+            </div>
         </div>
     )
 }

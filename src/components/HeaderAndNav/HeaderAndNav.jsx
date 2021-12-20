@@ -31,7 +31,7 @@ const HeaderAndNav = (props) => {
                     <Form onSubmit={handleSubmit}>
                         <Form.Group>
                             <Form.Control type="searchTerm" name="searchTerm" placeholder="Search for anime" onChange={handleChange} required={true} />
-                            <Button variant="primary" type="submit">
+                            <Button variant="primary" type="submit" className='button'>
                                 Search
                             </Button>
                         </Form.Group>
