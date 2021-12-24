@@ -10,8 +10,14 @@ import Rows from '../Row/Row';
 // import './HomePage.css'
 
 const HomePage = (props) =>{
+
+    const handleSubmit = (id) => {
+        props.view(id)
+        console.log(id)
+    }
+
     return (
-        <div>
+        <div className='main'>
             <Container>
                 <Row>
                     <Col className='text'>
@@ -20,82 +26,107 @@ const HomePage = (props) =>{
                 </Row>
             </Container>
             {/* <Rows title='Top Anime'/> */}
-            {/* <div className='row'>
+            <div className='row'>
                 <h2>Top Anime</h2>
                 <div className='row_posters'>
                     {props.topAnime.map((anime) => {
                         return(
-                            
+                            <div className='title'>
                                 <img 
                                 key={anime.mal_id} 
                                 className='row_poster' 
-                                src={anime.images.jpg.image_url} 
+                                src={anime.images.webp.image_url} 
                                 alt={anime.title} 
-                                title={anime.synopsis}>
+                                title={anime.synopsis}
+                                width="215"
+                                height="300"
+                                >
                                 </img>
+                                {/* <a href='/AnimeDetailsV4' onClick={handleSubmit(anime.mal_id)}>{anime.title}</a> */}
+                                <p>{anime.title}</p> 
+                                <Link to="/AnimeDetailsV4" onClick={() => props.view(anime.mal_id)} >Details</Link>
+                            </div>
                             )
                     })}
-            </div> */}
+            </div> 
 
 
-            {/* <div className='row'>
+            <div className='row'>
                 <h2>Top Action Anime</h2>
                 <div className='row_posters'>
                     {props.actionAnime.map((anime) =>{
                         return(
+                            <div className='title'>
                                 <img 
                                 key={anime.mal_id} 
                                 className='row_poster' 
                                 src={anime.image_url} 
                                 alt={anime.title} 
-                                title={anime.synopsis}>
+                                title={anime.synopsis}
+                                width="215"
+                                height="300">
                                 </img>
+                                <p>{anime.title}</p>
+                                <Link to="/AnimeDetails" onClick={() => props.viewV3(anime.mal_id)}>Details</Link>
+                            </div>
                         )
                     })}
                 </div>
-            </div> */}
+            </div> 
 
 
-            {/* <div className='row'>
+             <div className='row'>
                 <h2>Top Shounen Anime</h2>
                 <div className='row_posters'>
                     {props.shounenAnime.map((anime) =>{
                         return(
-                            <img 
-                            key={anime.mal_id} 
-                            className='row_poster' 
-                            src={anime.image_url} 
-                            alt={anime.title} 
-                            title={anime.synopsis}>
-                            </img>
-                        )
-                    })}
-                </div>
-            </div> */}
-
-
-            {/* <div className='row'>
-                <h2>Top Fantasy Anime</h2>
-                <div className='row_posters'>
-                    {props.fantasyAnime.map((anime) =>{
-                        return(
-                            <img 
-                            key={anime.mal_id} 
-                            className='row_poster' 
-                            src={anime.image_url} 
-                            alt={anime.title} 
-                            title={anime.synopsis}>
-                            </img>
+                            <div className='title'>
+                                <img 
+                                key={anime.mal_id} 
+                                className='row_poster' 
+                                src={anime.image_url} 
+                                alt={anime.title} 
+                                title={anime.synopsis}
+                                width="215"
+                                height="300">
+                                </img>
+                                <p>{anime.title}</p>
+                                <Link to="/AnimeDetails" onClick={() => props.viewV3(anime.mal_id)}>Details</Link>
+                            </div>
                         )
                     })}
                 </div>
             </div>
-            </div> */}
 
 
-            <div className='background'> 
+            <div className='row'>
+                <h2>Top Fantasy Anime</h2>
+                <div className='row_posters'>
+                    {props.fantasyAnime.map((anime) =>{
+                        return(
+                            <div className='title'>
+                                <img 
+                                key={anime.mal_id} 
+                                className='row_poster' 
+                                src={anime.image_url} 
+                                alt={anime.title} 
+                                title={anime.synopsis}
+                                width="215"
+                                height="300">
+                                </img>
+                                <p>{anime.title}</p>
+                                <Link to="/AnimeDetails" onClick={() => props.viewV3(anime.mal_id)}>Details</Link>
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
+            </div>
+
+
+            {/* <div className='background'>  */}
             {/* THIS USES V4 API */}
-            <h3>Top Anime: </h3>
+            {/* <h3>Top Anime: </h3>
                 <Table className='scroll'>
                     <thead>
                         <tr>
@@ -123,9 +154,9 @@ const HomePage = (props) =>{
                     </tbody>
                 </Table>
             </div>
-            <div className='scroll'> 
+            <div className='scroll'>  */}
                 {/* USING V3********* */}
-                <h3>Top Action Anime: </h3>
+                {/* <h3>Top Action Anime: </h3>
                 <Table>
                     <thead>
                         <tr>
@@ -154,13 +185,13 @@ const HomePage = (props) =>{
                         })}
                     </tbody>
                 </Table>
-            </div>
+            </div> */}
 
             
 
-            <div className='scroll'>
+            {/* <div className='scroll'> */}
                 {/* USING V3********* */}
-                <h3>Top Shounen Anime: </h3>
+                {/* <h3>Top Shounen Anime: </h3>
                 <Table>
                     <thead>
                         <tr>
@@ -187,12 +218,12 @@ const HomePage = (props) =>{
                         })}
                     </tbody>
                 </Table>
-            </div>
+            </div> */}
             
 
-            <div className='scroll'>
+            {/* <div className='scroll'> */}
                 {/* USING V3********* */}
-                <h3>Top Fantasy Anime: </h3>
+                {/* <h3>Top Fantasy Anime: </h3>
                 <Table>
                     <thead>
                         <tr>
@@ -219,7 +250,7 @@ const HomePage = (props) =>{
                         })}
                     </tbody>
                 </Table>
-            </div>
+            </div> */}
         </div>
     )
 }

@@ -13,7 +13,7 @@ const AnimeDetailsV4 = (props) => {
     useEffect(() => {
         setAnime(props.details.mal_id)
         props.getCommentsV4(props.details.mal_id)
-    }, [])
+    }, [comment, reply])
   
     const handleChange = (event) => {
         setComment(event.target.value)
@@ -34,12 +34,13 @@ const AnimeDetailsV4 = (props) => {
     const handleChangeReplies = (event) => {
         setReply(event.target.value)
     }
-
+    console.log(anime)
     return(
         <div>
             <Table>
                 <tbody>
                     <tr><td>{props.details.title}</td></tr>
+                    <tr><td>{props.details.title_english}</td></tr>
                     <tr><td><img src={props.details.images.jpg.image_url}></img></td></tr>
                     <tr><td>Rank: {props.details.rank} | Score: {props.details.score} | {props.details.episodes} Episodes | {props.details.type}</td></tr>
                     <tr><td>Genres: {props.details.genres.map((genre) => {

@@ -12,7 +12,6 @@ const SearchResult = (props) => {
                     <thead>
                         <tr>
                             <td>Title</td>
-                            <td>Rating</td>
                             <td>Score</td>
                             <td>Type</td>
                             <td>Episodes</td>
@@ -23,12 +22,11 @@ const SearchResult = (props) => {
                             return(
                                     <tr key={anime.mal_id}>
                                         <td>{anime.title}</td>
-                                        <td>{anime.rated}</td>
                                         <td>{anime.score}</td>
                                         <td>{anime.type}</td>
                                         <td>{anime.episodes}</td>
                                         <td><img src={anime.images.webp.image_url}></img></td>
-                                        <td><Link to="/AnimeDetails" onClick={() => props.viewV3(anime.mal_id)}>Details</Link></td>
+                                        <td><Link to="/AnimeDetailsV4" onClick={() => props.view(anime.mal_id)}>Details</Link></td>
                                     </tr>
                             )
                         })}

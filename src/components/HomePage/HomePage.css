@@ -3,33 +3,36 @@
   overflow-y: hidden;
   overflow-x: scroll;
   padding: 20px;
+  margin-left: 10px;
 }
 
 .row_posters::-webkit-scrollbar {
   display: none;
 }
 
-.row_poster {
+.title {
   object-fit: contain;
-  width: 90%;
-  max-height: 300px;
   margin-right: 10px;
   transition: transform 450ms;
 }
 
-.row_poster:hover {
-  transform: scale(1.08);
+.title:hover {
+  transform: scale(1.06);
 }
 
 .text {
   text-align: center;
 }
 
-/* div > row > row_posters > row_poster > title {
-  font-size: xx-small;
+p {
+  font-size: small;
   text-align: center;
-} */
+}
 
 .row {
   margin-left: 50%;
+}
+
+.main{
+  overflow-y: hidden;
 }
