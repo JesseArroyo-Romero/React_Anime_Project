@@ -55,6 +55,13 @@ const AnimeDetailsV4 = (props) => {
                     <tr><td>{props.details.synopsis}</td></tr>
                 </tbody>
             </Table>
+            
+            <iframe 
+                width='500'
+                height='300'
+                src={props.details.trailer.embed_url}
+                frameBorder='0'>
+            </iframe>
 
             <div>
                 <form onSubmit={handleSubmit}>
