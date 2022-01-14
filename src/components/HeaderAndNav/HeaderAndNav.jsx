@@ -28,6 +28,7 @@ const HeaderAndNav = (props) => {
                     <Link to="login">Login</Link>
                     <Link to="/" onClick={() => {props.logOut() }}>Logout</Link>
                     <Link to="/AccountRegistration">Account Registration</Link>
+                    <Link to="/CategoriesV4">Categories</Link>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group>
                             <Form.Control type="searchTerm" name="searchTerm" placeholder="Search for anime" onChange={handleChange} required={true} />

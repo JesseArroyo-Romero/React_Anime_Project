@@ -12,6 +12,8 @@ import AnimeDetailsV4 from './AnimeDetailsV4/AnimeDetailsV4';
 import SearchResult from './SearchResult/SearchResult';
 import EditProfile from './EditProfile/EditProfile';
 import './App.css'
+import CategoriesV4 from './CategoriesV4/CategoriesV4';
+import ActionAnimeV4 from './ActionAnimeV4/ActionAnimeV4';
 
 
 function App() {
@@ -19,6 +21,7 @@ function App() {
     const [user, setUser] = useState({})
     const [topAnime, setTopAnime] = useState([])
     const [actionAnime, setActionAnime] = useState([])
+    const [actionAnimeV4, setActionAnimeV4] =useState([])
     const [shounenAnime, setShounenAnime] = useState([])
     const [fantasyAnime, setFantasyAnime] = useState([])
     const [animeDetails, setAnimeDetails] = useState([])
@@ -26,14 +29,16 @@ function App() {
     const [searchResult, setSearchResult] = useState([])
     const [comments, setComments] = useState([])
 
-    let combinedList = [...actionAnime, ...shounenAnime, ...fantasyAnime]
 
     useEffect(() => {
         getTopAnime()
         getActionAnimeV3()
         getShounenAnimeV3()
         getFantasyAnimeV3()
+        getActionAnimeV4()
     }, [])
+
+    let combinedList = [...actionAnime, ...shounenAnime, ...fantasyAnime]
 
     const loginUser = async (loginUser) => {
         let response = await axios.post('http://127.0.0.1:8000/api/auth/login/', loginUser)
@@ -169,6 +174,12 @@ function App() {
         setUser(response.data)
     }
 
+    const getActionAnimeV4 = async () => {
+        let response = await axios.get('https://api.jikan.moe/v4/anime?genres=1')
+        setActionAnimeV4(response.data)
+        console.table("Category action", actionAnimeV4.data)
+    }
+
     return (
         <div>
             <Router>
@@ -185,7 +196,10 @@ function App() {
                                                             viewV3={seeAnimeDetailsV3}
                                                             />} 
                                                             />
-                    <Route path="/AccountRegistration" element={<AccountRegistration accountCreation={registerUser} />} />
+                    <Route path="/AccountRegistration" element={<AccountRegistration 
+                                                            accountCreation={registerUser} 
+                                                            />} 
+                                                            />
                     <Route path="/AnimeDetailsV4" element={<AnimeDetailsV4 
                                                             details={animeDetails} 
                                                             postCommentsV4={postComments}
@@ -207,7 +221,16 @@ function App() {
                                                             searchResult={searchResult} 
                                                             />} 
                                                             />
-                    <Route path="/EditProfile" element={<EditProfile edit={user} editCall={editProfile}/>} />
+                    <Route path="/EditProfile" element={<EditProfile 
+                                                            edit={user} 
+                                                            editCall={editProfile}
+                                                            />} 
+                                                            />
+                    <Route path="/CategoriesV4" element={<CategoriesV4 />} 
+                                                            />
+                    <Route path="/ActionAnimeV4" element={<ActionAnimeV4 
+                                                            actionAnimeV4={actionAnimeV4.data}/>} 
+                                                            />
                 </Routes>
             </Router>
         </div>
