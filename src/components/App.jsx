@@ -41,6 +41,7 @@ function App() {
     }, [])
 
     let combinedList = [...actionAnime, ...shounenAnime, ...fantasyAnime]
+    let combinedListV4 = [...actionAnimeV4.data]
 
     const loginUser = async (loginUser) => {
         let response = await axios.post('http://127.0.0.1:8000/api/auth/login/', loginUser)
@@ -114,7 +115,7 @@ function App() {
     }
 
     const seeActionAnimeDetailsV4 = (anime) => {
-        let details = actionAnimeV4.data.filter((detailsOfAnime) => detailsOfAnime.mal_id === anime)
+        let details = combinedListV4.filter((detailsOfAnime) => detailsOfAnime.mal_id === anime)
         setActionAnimeDetailsV4(details)
         console.log("details V4", actionAnimeDetailsV4)
     }
