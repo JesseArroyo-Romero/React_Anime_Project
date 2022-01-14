@@ -1,8 +1,7 @@
 import React from 'react';
-import axios from 'axios';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import { Table } from 'react-bootstrap';
+import { Link } from 'react-router-dom'
+
 
 
 const ActionAnimeV4 = (props) => {
@@ -20,7 +19,8 @@ const ActionAnimeV4 = (props) => {
                         return(
                             <div>
                                 <tr>
-                                    <td>{anime.title}</td>
+                                    <Link to="/AlternateAnimeDetailsV4" onClick={() => props.viewV4(anime.mal_id)}>{anime.title}</Link>
+                                    <td><img src={anime.images.jpg.image_url}></img></td>
                                 </tr>
                             </div>
                         )

@@ -39,17 +39,18 @@ const AnimeDetailsV4 = (props) => {
         <div>
             <Table>
                 <tbody>
-                    <tr><td>{props.details.title}</td></tr>
-                    <tr><td>{props.details.title_english}</td></tr>
-                    <tr><td><img src={props.details.images.jpg.image_url}></img></td></tr>
-                    <tr><td>Rank: {props.details.rank} | Score: {props.details.score} | {props.details.episodes} Episodes | {props.details.type}</td></tr>
-                    <tr><td>Genres: {props.details.genres.map((genre) => {
+                    <tr>
+                        <td>{props.details.title}</td>
+                        <td>{props.details.title_english}</td>
+                        <td><img src={props.details.images.jpg.image_url}></img></td>
+                        <td>Rank: {props.details.rank} | Score: {props.details.score} | {props.details.episodes} Episodes | {props.details.type}</td>
+                    </tr>
+                    <td>Genres: {props.details.genres.map((genre) => {
                             return(
                                 <td>{genre.name},</td>
                             )
                         })} 
                         </td>
-                    </tr>
                     <tr><td>Status: {props.details.status}</td></tr>
                     <tr><td>Rated: {props.details.rating}</td></tr>
                     <tr><td>{props.details.synopsis}</td></tr>

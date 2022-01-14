@@ -14,6 +14,7 @@ import EditProfile from './EditProfile/EditProfile';
 import './App.css'
 import CategoriesV4 from './CategoriesV4/CategoriesV4';
 import ActionAnimeV4 from './ActionAnimeV4/ActionAnimeV4';
+import AlternateAnimeDetailsV4 from './AlternateAnimeDetailsV4/AlternateAnimeDetailsV4';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
     const [topAnime, setTopAnime] = useState([])
     const [actionAnime, setActionAnime] = useState([])
     const [actionAnimeV4, setActionAnimeV4] =useState([])
+    const [actionAnimeDetailsV4, setActionAnimeDetailsV4] = useState({})
     const [shounenAnime, setShounenAnime] = useState([])
     const [fantasyAnime, setFantasyAnime] = useState([])
     const [animeDetails, setAnimeDetails] = useState([])
@@ -109,6 +111,12 @@ function App() {
         let details = topAnime.filter((detailsOfAnime) => detailsOfAnime.mal_id === anime)
         setAnimeDetails(details[0])
         console.log("V4 Details", details[0])
+    }
+
+    const seeActionAnimeDetailsV4 = (anime) => {
+        let details = actionAnimeV4.data.filter((detailsOfAnime) => detailsOfAnime.mal_id === anime)
+        setActionAnimeDetailsV4(details)
+        console.log("details V4", actionAnimeDetailsV4)
     }
 
     const getActionAnimeV3 = async () => {
@@ -229,8 +237,12 @@ function App() {
                     <Route path="/CategoriesV4" element={<CategoriesV4 />} 
                                                             />
                     <Route path="/ActionAnimeV4" element={<ActionAnimeV4 
-                                                            actionAnimeV4={actionAnimeV4.data}/>} 
+                                                            actionAnimeV4={actionAnimeV4.data}
+                                                            viewV4={seeActionAnimeDetailsV4}
+                                                            />} 
                                                             />
+                    <Route path="/AlternateAnimeDetailsV4" element={<AlternateAnimeDetailsV4 
+                                                            animeActionV4={actionAnimeDetailsV4}/>}/>
                 </Routes>
             </Router>
         </div>
