@@ -15,6 +15,8 @@ import './App.css'
 import CategoriesV4 from './CategoriesV4/CategoriesV4';
 import ActionAnimeV4 from './ActionAnimeV4/ActionAnimeV4';
 import AlternateAnimeDetailsV4 from './AlternateAnimeDetailsV4/AlternateAnimeDetailsV4';
+import AdventureAnimeV4 from './AdventureAnimeV4/AdventureAnimeV4';
+import AdventureAnimeDetailsV4 from './AdventureAnimeDetailsV4/AdventureAnimeDetailsV4';
 
 
 function App() {
@@ -30,6 +32,9 @@ function App() {
     const [animeDetailsV3, setAnimeDetailsV3] = useState([])
     const [searchResult, setSearchResult] = useState([])
     const [comments, setComments] = useState([])
+    const [adventureV4, setAdventureV4] = useState([])
+    const [adventureDetailsV4, setAdventureDetailsV4] = useState({})
+    const [awardWinningAnimeV4, setAwardWinningAnimeV4] = useState([])
 
 
     useEffect(() => {
@@ -38,10 +43,10 @@ function App() {
         getShounenAnimeV3()
         getFantasyAnimeV3()
         getActionAnimeV4()
+        getAdventureAnimeV4()
     }, [])
 
     let combinedList = [...actionAnime, ...shounenAnime, ...fantasyAnime]
-    let combinedListV4 = [...actionAnimeV4.data]
 
     const loginUser = async (loginUser) => {
         let response = await axios.post('http://127.0.0.1:8000/api/auth/login/', loginUser)
@@ -115,9 +120,14 @@ function App() {
     }
 
     const seeActionAnimeDetailsV4 = (anime) => {
-        let details = combinedListV4.filter((detailsOfAnime) => detailsOfAnime.mal_id === anime)
+        let details = actionAnimeV4.data.filter((detailsOfAnime) => detailsOfAnime.mal_id === anime)
         setActionAnimeDetailsV4(details)
         console.log("details V4", actionAnimeDetailsV4)
+    }
+
+    const seeAdventureAnimeDetailsV4 = (anime) => {
+        let details = adventureV4.filter((detailsOfAnime) => detailsOfAnime.mal_id === anime)
+        setAdventureDetailsV4(details)
     }
 
     const getActionAnimeV3 = async () => {
@@ -189,6 +199,16 @@ function App() {
         console.table("Category action", actionAnimeV4.data)
     }
 
+    const getAdventureAnimeV4 = async () => {
+        let response = await axios.get('https://api.jikan.moe/v4/anime?genres=2')
+        setAdventureV4(response.data.data)
+        console.log('Adventure', response.data.data)
+    }
+
+    const getAwardWinningAnimeV4 = async () => {
+
+    }
+
     return (
         <div>
             <Router>
@@ -242,8 +262,20 @@ function App() {
                                                             viewV4={seeActionAnimeDetailsV4}
                                                             />} 
                                                             />
+                    <Route path="/AdventureAnimeV4" element={<AdventureAnimeV4 
+                                                            adventureV4={adventureV4}
+                                                            viewV4={seeAdventureAnimeDetailsV4}
+                                                            />}
+                                                            />
                     <Route path="/AlternateAnimeDetailsV4" element={<AlternateAnimeDetailsV4 
-                                                            animeActionV4={actionAnimeDetailsV4}/>}/>
+                                                            animeActionV4={actionAnimeDetailsV4}
+                                                            />}
+                                                            />
+                    <Route path="AdventureAnimeDetailsV4" element={<AdventureAnimeDetailsV4                                                            
+                                                            adventureV4={adventureDetailsV4}
+                                                            />}
+                                                            />
+
                 </Routes>
             </Router>
         </div>

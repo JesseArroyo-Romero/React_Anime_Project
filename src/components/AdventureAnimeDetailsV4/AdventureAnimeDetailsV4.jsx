@@ -1,10 +1,9 @@
 import React from 'react';
 
-const AlternateAnimeDetailsV4 = (props) => {
+const AdventureAnimeDetailsV4 = (props) => {
     return (
         <div>
-            <div>
-                {props.animeActionV4.map((anime) => {
+            {props.adventureV4.map((anime) => {
                     return(
                         <div>
                             <h5>{anime.title}</h5>
@@ -13,8 +12,7 @@ const AlternateAnimeDetailsV4 = (props) => {
                     )
                 })}
             </div>
-        </div>
     );
 }
  
-export default AlternateAnimeDetailsV4;
+export default AdventureAnimeDetailsV4;
