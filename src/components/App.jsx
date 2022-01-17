@@ -17,6 +17,8 @@ import ActionAnimeV4 from './ActionAnimeV4/ActionAnimeV4';
 import AlternateAnimeDetailsV4 from './AlternateAnimeDetailsV4/AlternateAnimeDetailsV4';
 import AdventureAnimeV4 from './AdventureAnimeV4/AdventureAnimeV4';
 import AdventureAnimeDetailsV4 from './AdventureAnimeDetailsV4/AdventureAnimeDetailsV4';
+import AwardWinningAnimeV4 from './AwardWinningAnimeV4/AwardWinningAnimeV4';
+import AwardWinningAnimeDetailsV4 from './AwardWinningAnimeV4/AwardWinningAnimeDetailsV4';
 
 
 function App() {
@@ -35,6 +37,7 @@ function App() {
     const [adventureV4, setAdventureV4] = useState([])
     const [adventureDetailsV4, setAdventureDetailsV4] = useState({})
     const [awardWinningAnimeV4, setAwardWinningAnimeV4] = useState([])
+    const [awardWinningAnimeDetailsV4, setAwardWinningAnimeDetailsV4] = useState({})
 
 
     useEffect(() => {
@@ -128,6 +131,13 @@ function App() {
         setAdventureDetailsV4(details)
     }
 
+    const seeAwardWinningAnimeDetailsV4 = (anime) => {
+        let details = awardWinningAnimeV4.filter((detailsOfAnime) => detailsOfAnime.mal_id === anime)
+        setAwardWinningAnimeDetailsV4(details)
+    }
+
+
+
     const getActionAnimeV3 = async () => {
         //USING V3************
         let response = await axios.get('https://api.jikan.moe/v3/search/anime?genre=1&genre_exclude=12&order_by=score&moreinfo')
@@ -204,7 +214,9 @@ function App() {
     }
 
     const getAwardWinningAnimeV4 = async () => {
-
+        let response = await axios.get('https://api.jikan.moe/v4/anime?genres=46')
+        setAwardWinningAnimeV4(response.data.data)
+        console.log(response.data.data)
     }
 
     return (
@@ -275,7 +287,16 @@ function App() {
                                                             adventureV4={adventureDetailsV4}
                                                             />}
                                                             />
-
+                    <Route path="/AwardWinningAnimeV4" element={<AwardWinningAnimeV4 
+                                                            getAwardWinningAnimeV4={getAwardWinningAnimeV4}
+                                                            awardWinningAnimeV4={awardWinningAnimeV4}
+                                                            viewV4={seeAwardWinningAnimeDetailsV4}
+                                                            />} 
+                                                            />
+                    <Route path="/AwardWinningAnimeDetailsV4" element={<AwardWinningAnimeDetailsV4 
+                                                            awardWinningAnimeDetailsV4={awardWinningAnimeDetailsV4}
+                                                            />} 
+                                                            />
                 </Routes>
             </Router>
         </div>
