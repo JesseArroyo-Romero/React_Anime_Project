@@ -42,8 +42,6 @@ function App() {
         getActionAnimeV3()
         getShounenAnimeV3()
         getFantasyAnimeV3()
-        getActionAnimeV4()
-        getAdventureAnimeV4()
     }, [])
 
     let combinedList = [...actionAnime, ...shounenAnime, ...fantasyAnime]
@@ -257,12 +255,14 @@ function App() {
                                                             />
                     <Route path="/CategoriesV4" element={<CategoriesV4 />} 
                                                             />
-                    <Route path="/ActionAnimeV4" element={<ActionAnimeV4 
+                    <Route path="/ActionAnimeV4" element={<ActionAnimeV4
+                                                            getActionAnimeV4={getActionAnimeV4} 
                                                             actionAnimeV4={actionAnimeV4.data}
                                                             viewV4={seeActionAnimeDetailsV4}
                                                             />} 
                                                             />
                     <Route path="/AdventureAnimeV4" element={<AdventureAnimeV4 
+                                                            getAdventureAnimeV4={getAdventureAnimeV4}
                                                             adventureV4={adventureV4}
                                                             viewV4={seeAdventureAnimeDetailsV4}
                                                             />}

@@ -1,8 +1,14 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
 
 const AdventureAnimeV4 = (props) => {
+
+    useEffect(() => {
+        props.getAdventureAnimeV4()
+    }, [])
+
     return (
         <div>
             <Table>

@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
 
 
 
+
 const ActionAnimeV4 = (props) => {
     
+    useEffect(() => {
+        props.getActionAnimeV4()
+    }, [])
+
     return ( 
         <div>
             <Table>
