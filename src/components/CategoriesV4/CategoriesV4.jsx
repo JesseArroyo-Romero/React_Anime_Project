@@ -13,6 +13,9 @@ const CategoriesV4 = (props) => {
             <div>
                 <Link to='/AwardWinningAnimeV4'>Award Winning</Link>
             </div>
+            <div>
+                <Link to='/ComedyAnimeV4'>Comedy</Link>
+            </div>
         </div>
      );
 }

@@ -19,6 +19,8 @@ import AdventureAnimeV4 from './AdventureAnimeV4/AdventureAnimeV4';
 import AdventureAnimeDetailsV4 from './AdventureAnimeDetailsV4/AdventureAnimeDetailsV4';
 import AwardWinningAnimeV4 from './AwardWinningAnimeV4/AwardWinningAnimeV4';
 import AwardWinningAnimeDetailsV4 from './AwardWinningAnimeV4/AwardWinningAnimeDetailsV4';
+import ComedyAnimeV4 from './ComedyAnimeV4/ComedyAnimeV4';
+import ComedyAnimeDetailsV4 from './ComedyAnimeDetailsV4/ComedyAnimeDetailsV4';
 
 
 function App() {
@@ -38,6 +40,8 @@ function App() {
     const [adventureDetailsV4, setAdventureDetailsV4] = useState({})
     const [awardWinningAnimeV4, setAwardWinningAnimeV4] = useState([])
     const [awardWinningAnimeDetailsV4, setAwardWinningAnimeDetailsV4] = useState({})
+    const [comedyV4, setComedyV4] = useState([])
+    const [comedyAnimeDetailsV4, setComedyAnimeDetailsV4] = useState({})
 
 
     useEffect(() => {
@@ -110,20 +114,17 @@ function App() {
         //USING V4
         let response = await axios.get('https://api.jikan.moe/v4/top/anime')
         setTopAnime(response.data.data)
-        console.log("V4 top anime", response.data.data)
     }
 
 
     const seeAnimeDetailsV4 = (anime) => {
         let details = topAnime.filter((detailsOfAnime) => detailsOfAnime.mal_id === anime)
         setAnimeDetails(details[0])
-        console.log("V4 Details", details[0])
     }
 
     const seeActionAnimeDetailsV4 = (anime) => {
         let details = actionAnimeV4.data.filter((detailsOfAnime) => detailsOfAnime.mal_id === anime)
         setActionAnimeDetailsV4(details)
-        console.log("details V4", actionAnimeDetailsV4)
     }
 
     const seeAdventureAnimeDetailsV4 = (anime) => {
@@ -136,20 +137,23 @@ function App() {
         setAwardWinningAnimeDetailsV4(details)
     }
 
+    const seeComedyAnimeDetailsV4 = (anime) => {
+        let details = comedyV4.filter((detailsOfAnime) => detailsOfAnime.mal_id === anime)
+        setComedyAnimeDetailsV4(details)
+    }
+
 
 
     const getActionAnimeV3 = async () => {
         //USING V3************
         let response = await axios.get('https://api.jikan.moe/v3/search/anime?genre=1&genre_exclude=12&order_by=score&moreinfo')
         setActionAnime(response.data.results)
-        console.log("Action Anime", actionAnime)
     }
 
     const getShounenAnimeV3 = async () => {
         //USING V3************
         let response = await axios.get('https://api.jikan.moe/v3/search/anime?genre=27&genre_exclude=12&order_by=score&moreinfo')
         setShounenAnime(response.data.results)
-        console.log("Shounen Anime", shounenAnime)
     }
 
     const getFantasyAnimeV3 = async () => {
@@ -204,19 +208,22 @@ function App() {
     const getActionAnimeV4 = async () => {
         let response = await axios.get('https://api.jikan.moe/v4/anime?genres=1')
         setActionAnimeV4(response.data)
-        console.table("Category action", actionAnimeV4.data)
     }
 
     const getAdventureAnimeV4 = async () => {
         let response = await axios.get('https://api.jikan.moe/v4/anime?genres=2')
         setAdventureV4(response.data.data)
-        console.log('Adventure', response.data.data)
     }
 
     const getAwardWinningAnimeV4 = async () => {
         let response = await axios.get('https://api.jikan.moe/v4/anime?genres=46')
         setAwardWinningAnimeV4(response.data.data)
-        console.log(response.data.data)
+    }
+
+    const getComedyAnimeV4 = async () => {
+        let response = await axios.get('https://api.jikan.moe/v4/anime?genres=4')
+        setComedyV4(response.data.data)
+        console.log("comedy",response.data.data)
     }
 
     return (
@@ -295,6 +302,16 @@ function App() {
                                                             />
                     <Route path="/AwardWinningAnimeDetailsV4" element={<AwardWinningAnimeDetailsV4 
                                                             awardWinningAnimeDetailsV4={awardWinningAnimeDetailsV4}
+                                                            />} 
+                                                            />
+                    <Route path="/ComedyAnimeV4" element={<ComedyAnimeV4 
+                                                            getComedyAnimeV4={getComedyAnimeV4}
+                                                            comedyV4={comedyV4}
+                                                            viewV4={seeComedyAnimeDetailsV4}
+                                                            />} 
+                                                            />
+                    <Route path="/ComedyAnimeDetailsV4" element={<ComedyAnimeDetailsV4 
+                                                            comedyAnimeDetailsV4={comedyAnimeDetailsV4}
                                                             />} 
                                                             />
                 </Routes>
